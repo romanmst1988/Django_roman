@@ -13,5 +13,5 @@ def contact_post(request):
         massage = request.POST.get('massage')
 
         return HttpResponse(f'Спасибо: {name}! Сообщение получено.')
-    return render(request, 'catalog/catalog_post.html')
+    return render(request, 'catalog/contact_post.html')
 
