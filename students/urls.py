@@ -5,7 +5,7 @@ app_name = 'students'
 
 urlpatterns = [
     path('about/', views.about, name='about'),
-    path('catalog/', views.contact, name='catalog'),
+    path('contact_post/', views.contact_post, name='contact_post'),
 ]
 
 # urlpatterns = [

@@ -4,13 +4,13 @@ from django.shortcuts import render
 def about(request):
     return render(request, 'students/about.html')
 
-def contact(request):
+def contact_post(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         massage = request.POST.get('massage')
 
         return HttpResponse(f'Спасибо: {name}! Сообщение получено.')
-    return render(request, 'students/catalog.html')
+    return render(request, 'students/contact_post.html')
 
 # def example_view(request):
 #     return render(request, 'app/example.html')
