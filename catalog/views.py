@@ -1,8 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-def index(request):
-    return render(request, 'catalog/index.html')
 
 def home(request):
     return render(request, 'catalog/home.html')
@@ -18,4 +16,5 @@ def contact_post(request):
 
         return HttpResponse(f'Спасибо: {name}! Сообщение получено.')
     return render(request, 'catalog/contact_post.html')
+
 
