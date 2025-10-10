@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
+
+load_dotenv(override=True)
 
 from django.conf.global_settings import STATICFILES_DIRS, MEDIA_URL
 
@@ -22,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4g#1kh(c_a=@6a)+2rii$uvh6a082%(hf8=7s5hrsf2j(j6&hz'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv('DEBUG') == "True" else False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -78,11 +81,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_project',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('SECRET_KEY'),
+        'USER': os.getenv('SECRET_KEY'),
+        'PASSWORD': os.getenv('SECRET_KEY'),
+        'HOST': os.getenv('SECRET_KEY'),
+        'PORT': os.getenv('SECRET_KEY'),
     }
 }
 
