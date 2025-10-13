@@ -1,8 +1,11 @@
 from django.contrib import admin
 from .models import Catalog
 
-# admin.site.register(Catalog) # самый простой способ
+# самый простой способ
+# admin.site.register(Catalog)
 
+
+# второй простой способ обширный и гибкий с декоратором
 @admin.register(Catalog)
 class CatalogAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'year')
