@@ -1,0 +1,65 @@
+[
+{
+    "model": "catalog.catalog",
+    "pk": 3,
+    "fields": {
+        "first_name": "Частный дом",
+        "last_name": "150",
+        "year": "Первичная недвижимость"
+    }
+},
+{
+    "model": "catalog.catalog",
+    "pk": 4,
+    "fields": {
+        "first_name": "Квартира-2 к.",
+        "last_name": "70,2",
+        "year": "Первичная недвижимость"
+    }
+},
+{
+    "model": "catalog.catalog",
+    "pk": 5,
+    "fields": {
+        "first_name": "Студия",
+        "last_name": "29,9",
+        "year": "Новостройки"
+    }
+},
+{
+    "model": "catalog.catalog",
+    "pk": 6,
+    "fields": {
+        "first_name": "Жилой дом",
+        "last_name": "90",
+        "year": "Старый жилой фонд"
+    }
+},
+{
+    "model": "catalog.catalog",
+    "pk": 10,
+    "fields": {
+        "first_name": "Квартира 1-к",
+        "last_name": "42,3",
+        "year": "Первичная недвижимость"
+    }
+},
+{
+    "model": "catalog.catalog",
+    "pk": 11,
+    "fields": {
+        "first_name": "Квартира 2-к",
+        "last_name": "61,2",
+        "year": "Новостройки"
+    }
+},
+{
+    "model": "catalog.catalog",
+    "pk": 12,
+    "fields": {
+        "first_name": "Квартира 3-к",
+        "last_name": "78,1",
+        "year": "Дома со сроком эксплуатации до X лет"
+    }
+}
+]
