@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import Catalog
 
-# Register your models here.
+# admin.site.register(Catalog) # самый простой способ
+
+@admin.register(Catalog)
+class CatalogAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'year')
+    list_filter = ('year',)
+    search_fields = ('first_name', 'last_name',)
