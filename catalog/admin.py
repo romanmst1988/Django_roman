@@ -17,19 +17,15 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'email', 'is_active', 'created_at')
-    list_editable = ('is_active',)
-    list_filter = ('is_active', 'created_at')
-    search_fields = ('name', 'phone', 'email')
+    list_display = ("name", "phone", "email", "is_active", "created_at")
+    list_editable = ("is_active",)
+    list_filter = ("is_active", "created_at")
+    search_fields = ("name", "phone", "email")
     fieldsets = (
-        ('Основная информация', {
-            'fields': ('name', 'is_active')
-        }),
-        ('Контактные данные', {
-            'fields': ('address', 'phone', 'email', 'working_hours')
-        }),
-        ('Карта', {
-            'fields': ('map_code',),
-            'classes': ('collapse',)
-        }),
+        ("Основная информация", {"fields": ("name", "is_active")}),
+        (
+            "Контактные данные",
+            {"fields": ("address", "phone", "email", "working_hours")},
+        ),
+        ("Карта", {"fields": ("map_code",), "classes": ("collapse",)}),
     )

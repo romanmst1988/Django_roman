@@ -3,8 +3,8 @@ from django.shortcuts import render
 from catalog.models import Product, Contact
 
 
-def home(request):# Получаем последние 5 созданных продуктов
-    latest_products = Product.objects.all().order_by('-id')[:5]
+def home(request):  # Получаем последние 5 созданных продуктов
+    latest_products = Product.objects.all().order_by("-id")[:5]
 
     # Выводим в консоль
     print("Последние 5 продуктов:")
@@ -12,10 +12,10 @@ def home(request):# Получаем последние 5 созданных п�
         print(f"- {product.name} (ID: {product.id})")
 
     context = {
-        'title': 'Главная страница',
-        'latest_products': latest_products,  # Передаем в шаблон
+        "title": "Главная страница",
+        "latest_products": latest_products,  # Передаем в шаблон
     }
-    return render(request, 'catalog/home.html', context)
+    return render(request, "catalog/home.html", context)
 
 
 def contacts(request):
@@ -23,10 +23,10 @@ def contacts(request):
     contact_info = Contact.objects.filter(is_active=True).first()
 
     context = {
-        'title': 'Контакты',
-        'contact_info': contact_info,
+        "title": "Контакты",
+        "contact_info": contact_info,
     }
-    return render(request, 'catalog/contacts.html', context)
+    return render(request, "catalog/contacts.html", context)
 
 
 def contact_post(request):
@@ -38,24 +38,5 @@ def contact_post(request):
     return render(request, "catalog/contact_post.html")
 
 
-
-#добавляем запрос:
-
-# def index(request):
-#     # Получаем последние 5 созданных продуктов
-#     latest_products = Product.objects.all().order_by('-id')[:5]
-#
-#     # Выводим в консоль
-#     print("Последние 5 продуктов:")
-#     for product in latest_products:
-#         print(f"- {product.name} (ID: {product.id})")
-#
-#     context = {
-#         'title': 'Главная страница',
-#         'latest_products': latest_products,  # Передаем в шаблон
-#     }
-#     return render(request, 'catalog/home.html', context)
-
-
 def about(request):
-    return render(request, 'catalog/about.html')
+    return render(request, "catalog/about.html")

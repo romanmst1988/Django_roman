@@ -79,39 +79,22 @@ class Category(models.Model):
 
 # Создаем модель контактных данных
 class Contact(models.Model):
-    name = models.CharField(
-        max_length=100,
-        verbose_name='Название организации'
-    )
-    address = models.TextField(verbose_name='Адрес')
-    phone = models.CharField(max_length=20, verbose_name='Телефон')
-    email = models.EmailField(verbose_name='Email')
-    working_hours = models.CharField(
-        max_length=100,
-        verbose_name='Режим работы'
-    )
+    name = models.CharField(max_length=100, verbose_name="Название организации")
+    address = models.TextField(verbose_name="Адрес")
+    phone = models.CharField(max_length=20, verbose_name="Телефон")
+    email = models.EmailField(verbose_name="Email")
+    working_hours = models.CharField(max_length=100, verbose_name="Режим работы")
     map_code = models.TextField(
-        blank=True,
-        null=True,
-        verbose_name='Код карты (iframe)'
+        blank=True, null=True, verbose_name="Код карты (iframe)"
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Дата создания'
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Дата обновления'
-    )
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name='Активно'
-    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    is_active = models.BooleanField(default=True, verbose_name="Активно")
 
     class Meta:
-        verbose_name = 'Контакт'
-        verbose_name_plural = 'Контакты'
-        ordering = ['-created_at']
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"
+        ordering = ["-created_at"]
 
     def __str__(self):
         return self.name
