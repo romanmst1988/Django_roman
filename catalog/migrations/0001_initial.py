@@ -8,37 +8,67 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, verbose_name='Категория Недвижимости')),
-                ('description', models.TextField(blank=True, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=150, verbose_name="Категория Недвижимости"
+                    ),
+                ),
+                ("description", models.TextField(blank=True, null=True)),
             ],
             options={
-                'verbose_name': 'Категория Недвижимости',
-                'verbose_name_plural': 'Категории Недвижимости',
+                "verbose_name": "Категория Недвижимости",
+                "verbose_name_plural": "Категории Недвижимости",
             },
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('image', models.ImageField(upload_to='photos/', verbose_name='Фотография')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='catalog.category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("description", models.TextField(blank=True, null=True)),
+                (
+                    "image",
+                    models.ImageField(upload_to="photos/", verbose_name="Фотография"),
+                ),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="products",
+                        to="catalog.category",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Объект Недвижимости',
-                'verbose_name_plural': 'Объекты Недвижимости',
+                "verbose_name": "Объект Недвижимости",
+                "verbose_name_plural": "Объекты Недвижимости",
             },
         ),
     ]
