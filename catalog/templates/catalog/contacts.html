@@ -30,7 +30,7 @@
     <!-- Навигационная панель -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href=" ">
                 <i class="bi bi-shop"></i> Apartment-store - Магазин квартир
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -79,8 +79,8 @@
                     <div class="mt-5">
                         <h5>Контактная информация</h5>
                         <div class="mt-3">
-                            <p><i class="bi bi-telephone"></i> <strong>+7 (495) 123-45-67</strong></p>
-                            <p><i class="bi bi-envelope"></i> info@example.com</p>
+                            <p><i class="bi bi-telephone"></i> <strong>+7 (938) 414-37-64</strong></p>
+                            <p><i class="bi bi-envelope"></i> mstislavskijr@gmail.com</p>
                             <p><i class="bi bi-clock"></i> Пн-Пт: 9:00-18:00</p>
                         </div>
                     </div>
@@ -97,61 +97,46 @@
                     </ol>
                 </nav>
 
-                <h1 class="mb-4">Контакты</h1>
+                <!-- Основной контент  -->
+                <div class="features">
+                    <h1>{{ title }}</h1>
 
-                <div class="row">
-                    <div class="col-lg-7 mb-4">
-                        <div class="card contact-card">
-                            <div class="card-header bg-primary text-white">
-                                <h3 class="mb-0"><i class="bi bi-geo-alt"></i> Наши офисы</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <h5>Москва</h5>
-                                        <p><i class="bi bi-geo-alt-fill"></i> ул. Тверская, д. 10</p>
-                                        <p><i class="bi bi-telephone"></i> +7 (495) 777-77-77</p>
-                                        <p><i class="bi bi-envelope"></i> moscow@example.com</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h5>Санкт-Петербург</h5>
-                                        <p><i class="bi bi-geo-alt-fill"></i> Невский пр-т, д. 25</p>
-                                        <p><i class="bi bi-telephone"></i> +7 (812) 888-88-88</p>
-                                        <p><i class="bi bi-envelope"></i> spb@example.com</p>
-                                    </div>
+                        <div class="contact-info">
+                            <h2>{{ contact_info.name }}</h2>
+
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <strong>Адрес:</strong>
+                                    <p>{{ contact_info.address }}</p>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h5>Екатеринбург</h5>
-                                        <p><i class="bi bi-geo-alt-fill"></i> ул. Ленина, д. 15</p>
-                                        <p><i class="bi bi-telephone"></i> +7 (343) 999-99-99</p>
-                                        <p><i class="bi bi-envelope"></i> ekb@example.com</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h5>Новосибирск</h5>
-                                        <p><i class="bi bi-geo-alt-fill"></i> Красный пр-т, д. 30</p>
-                                        <p><i class="bi bi-telephone"></i> +7 (383) 666-66-66</p>
-                                        <p><i class="bi bi-envelope"></i> nsk@example.com</p>
-                                    </div>
+                                <div class="contact-item">
+                                    <strong>Телефон:</strong>
+                                    <p>{{ contact_info.phone }}</p>
+                                </div>
+
+                                <div class="contact-item">
+                                    <strong>Email:</strong>
+                                    <p>{{ contact_info.email }}</p>
+                                </div>
+
+                                <div class="contact-item">
+                                    <strong>Режим работы:</strong>
+                                    <p>{{ contact_info.working_hours }}</p>
                                 </div>
                             </div>
+                                <div class="map-container">
+                                    <h3>Мы на карте</h3>
+                                    <div class="map">
+                                        {{ contact_info.map_code|safe }}
+                                    </div>
+                                </div>
                         </div>
-
-                        <!-- Карта -->
-                        <div class="card">
-                            <div class="card-header bg-secondary text-white">
-                                <h4 class="mb-0"><i class="bi bi-map"></i> Мы на карте</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="bg-light rounded p-5 text-center">
-                                    <i class="bi bi-map display-1 text-muted"></i>
-                                    <p class="mt-3">Здесь будет интерактивная карта</p>
-                                    <small class="text-muted">(Интеграция с Яндекс.Карты или Google Maps)</small>
-                                </div>
-                            </div>
+                        <div class="no-contacts">
+                            <p>Контактная информация временно недоступна.</p>
+                            <p>Пожалуйста, свяжитесь с нами по телефону: +7 (938) 414-37-64</p>
                         </div>
-                    </div>
+                </div>
 
                     <div class="col-lg-5">
                         <div class="card form-card">
@@ -243,8 +228,8 @@
                 </div>
                 <div class="col-md-4">
                     <h5>Контакты</h5>
-                    <p>Email: info@example.com</p>
-                    <p>Телефон: +7 (495) 123-45-67</p>
+                    <p>Email: mstislavskijr@gmail.com</p>
+                    <p>Телефон: +7 (938) 414-37-64</p>
                 </div>
                 <div class="col-md-4">
                     <h5>Мы в соцсетях</h5>
