@@ -9,7 +9,7 @@ from .models import Product, Category
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name','price', 'category') # поля для отображения в админке
     search_fields = ('name', 'description') # поиск по имени и писанию
-    list_filter = ('category',) # фильтр по категории, дате создания и изменения
+    list_filter = ('category',)
 
 @admin.register(Category) # декоратор для регистрации модели
 class CategoryAdmin(admin.ModelAdmin):

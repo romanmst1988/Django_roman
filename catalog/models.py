@@ -15,12 +15,9 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Объект Недвижимости'
         verbose_name_plural = 'Объекты Недвижимости'
-        ordering = ['name']
 
 class Category(models.Model):
-    # first_name = models.CharField(max_length=150, verbose_name='Вид недвижимости')
-    # last_name = models.CharField(max_length=150, verbose_name='Площадь (кв.м)', unique=True)
-    name = models.CharField(max_length=150, verbose_name='Категория Недвижимости')
+    name = models.CharField(max_length=150, verbose_name='Категория Недвижимости') #Поле для названия
     description = models.TextField(null=True, blank=True) #Поле для описания
 
     def __str__(self):
