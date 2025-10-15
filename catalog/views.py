@@ -15,7 +15,7 @@ def home(request):  # Получаем последние 5 созданных �
         "title": "Главная страница",
         "latest_products": latest_products,  # Передаем в шаблон
     }
-    return render(request, "catalog/home.html", context)
+    return render(request, "catalog/home.html", context=context)
 
 
 def contacts(request):
@@ -26,7 +26,7 @@ def contacts(request):
         "title": "Контакты",
         "contact_info": contact_info,
     }
-    return render(request, "catalog/contacts.html", context)
+    return render(request, "catalog/contacts.html", context=context)
 
 
 def contact_view(request):
@@ -48,4 +48,4 @@ def contact_post(request):
 def real_estate_catalog(request):
     product_all = Product.objects.all()
     context = {'products': product_all}
-    return render(request, "catalog/real_estate_catalog.html", context)
+    return render(request, "catalog/real_estate_catalog.html", context=context)
