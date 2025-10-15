@@ -138,28 +138,33 @@
                         </div>
                 </div>
 
+
+<!--Реализую обратную связь-->
                     <div class="col-lg-5">
                         <div class="card form-card">
                             <div class="card-header bg-success text-white">
                                 <h3 class="mb-0"><i class="bi bi-chat-dots"></i> Обратная связь</h3>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <!-- Добавлен action и method -->
+                                <form method="POST" action="{% url 'contact_post' %}">
+                                    {% csrf_token %}  <!-- Важно: защита от CSRF -->
+
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Ваше имя *</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Введите ваше имя" required>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше имя" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email *</label>
-                                        <input type="email" class="form-control" id="email" placeholder="example@mail.com" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.com" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Телефон</label>
-                                        <input type="tel" class="form-control" id="phone" placeholder="+7 (XXX) XXX-XX-XX">
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX">
                                     </div>
                                     <div class="mb-3">
                                         <label for="subject" class="form-label">Тема сообщения</label>
-                                        <select class="form-select" id="subject">
+                                        <select class="form-select" id="subject" name="subject">
                                             <option selected>Выберите тему...</option>
                                             <option value="1">Общие вопросы</option>
                                             <option value="2">Техническая поддержка</option>
@@ -169,10 +174,10 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="message" class="form-label">Сообщение *</label>
-                                        <textarea class="form-control" id="message" rows="5" placeholder="Введите ваше сообщение..." required></textarea>
+                                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Введите ваше сообщение..." required></textarea>
                                     </div>
                                     <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" id="agree" required>
+                                        <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
                                         <label class="form-check-label" for="agree">
                                             Согласен на обработку персональных данных
                                         </label>
@@ -184,6 +189,8 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
@@ -216,7 +223,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Футер -->
     <footer class="bg-dark text-light mt-5 py-4">
