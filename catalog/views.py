@@ -29,13 +29,20 @@ def contacts(request):
     return render(request, "catalog/contacts.html", context)
 
 
+def contact_view(request):
+    # Отображение формы
+    return render(request, 'contacts.html')
+
+
 def contact_post(request):
     if request.method == "POST":
         name = request.POST.get("name")
-        massage = request.POST.get("massage")
+        message = request.POST.get("message")
 
-        return HttpResponse(f"Спасибо: {name}! Сообщение получено.")
-    return render(request, "catalog/contact_post.html")
+        return HttpResponse(f"Спасибо, {name}! Сообщение получено.")
+
+    # Если запрос не POST, перенаправляем на форму
+    return render(request, 'contacts.html')
 
 
 def about(request):
