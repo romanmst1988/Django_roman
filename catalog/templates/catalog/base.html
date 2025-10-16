@@ -1,0 +1,63 @@
+<!--Создаем базовые шаблоны-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Apartment-store{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .product-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .product-image {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            {% include 'catalog/menu.html' %}
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Магазин. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
