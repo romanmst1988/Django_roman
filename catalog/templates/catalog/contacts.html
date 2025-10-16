@@ -27,6 +27,19 @@
     </style>
 </head>
 <body>
+{% extends 'catalog/base.html' %}
+
+{% block title %}Контакты - Магазин{% endblock %}
+
+{% block content %}
+<h1>Контакты</h1>
+<p>Свяжитесь с нами:</p>
+<ul>
+    <li>Телефон: +7 (999) 999-99-99</li>
+    <li>Email: info@shop.ru</li>
+    <li>Адрес: г. Москва, ул. Примерная, д. 123</li>
+</ul>
+{% endblock %}
     <!-- Навигационная панель -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">

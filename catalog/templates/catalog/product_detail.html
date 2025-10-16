@@ -1,0 +1,26 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}{{ product.name }} - Магазин{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <a href="{% url 'home/' %}">← Назад к списку товаров</a>
+    
+    <div class="product-card">
+        <h1>{{ product.name }}</h1>
+        
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+        {% endif %}
+        
+        <p><strong>Описание:</strong> {{ product.description }}</p>
+        <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+        <p><strong>Категория:</strong> {{ product.category }}</p>
+        <p><strong>Дата создания:</strong> {{ product.created_at|date:"d.m.Y H:i" }}</p>
+        
+        {% if product.updated_at %}
+        <p><strong>Дата обновления:</strong> {{ product.updated_at|date:"d.m.Y H:i" }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
