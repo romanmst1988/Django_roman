@@ -6,7 +6,7 @@ from catalog.models import Product, Contact
 def home(request):  # Получаем последние 5 созданных продуктов
     latest_products = Product.objects.all().order_by("-id")[:5]
 
-    # Выводим в консоль
+    # Выводим в консоль с использованием контекста
     print("Последние 5 продуктов:")
     for product in latest_products:
         print(f"- {product.name} (ID: {product.id})")
@@ -15,18 +15,18 @@ def home(request):  # Получаем последние 5 созданных �
         "title": "Главная страница",
         "latest_products": latest_products,  # Передаем в шаблон
     }
-    return render(request, "catalog/home.html", context)
+    return render(request, "catalog/home.html", context=context)
 
 
 def contacts(request):
-    # Получаем активные контактные данные
+    # Получаем активные контактные данные с использованием контекста
     contact_info = Contact.objects.filter(is_active=True).first()
 
     context = {
         "title": "Контакты",
         "contact_info": contact_info,
     }
-    return render(request, "catalog/contacts.html", context)
+    return render(request, "catalog/contacts.html", context=context)
 
 
 def contact_view(request):
@@ -45,5 +45,7 @@ def contact_post(request):
     return render(request, 'contacts.html')
 
 
-def about(request):
-    return render(request, "catalog/about.html")
+def real_estate_catalog(request):
+    product_all = Product.objects.all()
+    context = {'products': product_all}
+    return render(request, "catalog/real_estate_catalog.html", context=context)
