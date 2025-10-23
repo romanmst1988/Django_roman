@@ -1,63 +1,112 @@
-<!--Создаем базовые шаблоны-->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Apartment-store{% endblock %}</title>
+    <title>{% block title %}Мой сайт{% endblock %}</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Дополнительные стили -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+        .navbar-brand {
+            font-weight: bold;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        .footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            margin-top: 3rem;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1rem 0;
+        .card {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 1.5rem;
         }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-        .product-card {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
-        }
-        .product-image {
-            max-width: 200px;
-            height: auto;
+        .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            {% include 'catalog/menu.html' %}
-        </div>
-    </header>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-store"></i> Apartment-store
+            </a>
 
-    <main class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Главная
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'catalog:product_list' %}">
+                            <i class="fas fa-box"></i> Каталог недвижимости
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'catalog:category_list' %}">
+                            <i class="fas fa-tags"></i> Категории
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:blog_list' %}">
+                            <i class="fas fa-blog"></i> Блог
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'catalog:contact' %}">
+                            <i class="fas fa-envelope"></i> Контакты
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="container my-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer>
+    <!-- Футер -->
+    <footer class="footer mt-5">
         <div class="container">
-            <p>&copy; 2024 Магазин. Все права защищены.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Apartment-store</h5>
+                    <p class="text-muted">Apartment-store - Магазин квартир - это отличный вариант подбора недвижимости</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="text-muted">&copy; 2024 Apartment-store. Все права защищены.</p>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block extra_js %}
+    {% endblock %}
 </body>
 </html>
