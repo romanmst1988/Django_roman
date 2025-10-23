@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+<nav style="background-color: #f8f9fa; padding: 1rem; margin-bottom: 2rem;">
+    <ul style="list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0;">
+        <li><a href="{% url 'home' %}" style="text-decoration: none; color: #007bff; font-weight: bold;">Главная</a></li>
+        <li><a href="{% url 'catalog:product_list' %}" style="text-decoration: none; color: #007bff; font-weight: bold;">Каталог</a></li>
+        <li><a href="{% url 'catalog:category_list' %}" style="text-decoration: none; color: #007bff; font-weight: bold;">Категории</a></li>
+        <li><a href="{% url 'blog:blog_list' %}" style="text-decoration: none; color: #007bff; font-weight: bold;">Блог</a></li>
+        <li><a href="{% url 'catalog:contact' %}" style="text-decoration: none; color: #007bff; font-weight: bold;">Контакты</a></li>
+    </ul>
+</nav>
+</body>
+</html>
