@@ -5,10 +5,10 @@ app_name = 'catalog'
 
 urlpatterns = [
     path('', views.ProductListView.as_view(), name='product_list'),
-    path('products/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),
-    path('products/create/', views.ProductCreateView.as_view(), name='product_create'),
-    path('products/<int:pk>/update/', views.ProductUpdateView.as_view(), name='product_update'),
-    path('products/<int:pk>/delete/', views.ProductDeleteView.as_view(), name='product_delete'),
+    path('product/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),
+    path('product/add/', views.ProductCreateView.as_view(), name='product_add'),
+    path('product/<int:pk>/edit/', views.ProductUpdateView.as_view(), name='product_edit'),
+    path('product/<int:pk>/delete/', views.ProductDeleteView.as_view(), name='product_delete'),
     path('categories/', views.CategoryListView.as_view(), name='category_list'),
-    path('contact/', views.ContactTemplateView.as_view(), name='contact'),
+    path("contacts/", views.ContactView.as_view(), name="contact"),
 ]
