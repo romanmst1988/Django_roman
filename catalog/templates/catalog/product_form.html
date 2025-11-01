@@ -1,17 +1,71 @@
-{% extends 'catalog/base.html' %}
-
-{% block title %}
-    {% if object %}Редактирование продукта{% else %}Создание продукта{% endif %}
-{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
-<h1>{% if object %}Редактирование продукта{% else %}Создание продукта{% endif %}</h1>
+<div class="container mt-4">
+  <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary mb-3">Назад</a>
+  <h1 class="mb-3">{% if form.instance.pk %}Редактировать объект{% else %}Добавить объект{% endif %}</h1>
 
-<form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Сохранить</button>
-</form>
 
-<a href="{% url 'catalog:product_list' %}">Отмена</a>
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <div class="mb-3">
+      {{ form.name.label_tag }}
+      {{ form.name }}
+      {% for err in form.name.errors %}
+        <div class="text-danger small">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.description.label_tag }}
+      {{ form.description }}
+      {% for err in form.description.errors %}
+        <div class="text-danger small">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.image.label_tag }}
+      {{ form.image }}
+      {% for err in form.image.errors %}
+        <div class="text-danger small">{{ err }}</div>
+      {% endfor %}
+      {% if form.instance.pk and form.instance.image %}
+        <div class="mt-2">
+          <img src="{{ form.instance.image.url }}" alt="" style="max-width:200px;">
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.category.label_tag }}
+      {{ form.category }}
+      {% for err in form.category.errors %}
+        <div class="text-danger small">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      {{ form.price.label_tag }}
+      {{ form.price }}
+      {% for err in form.price.errors %}
+        <div class="text-danger small">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-check mb-3">
+      {{ form.is_active }}
+      {{ form.is_active.label_tag }}
+      {% for err in form.is_active.errors %}
+        <div class="text-danger small">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
 {% endblock %}

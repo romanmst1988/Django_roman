@@ -1,7 +1,10 @@
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from .models import BlogPost
 from .forms import BlogPostForm
+
+class BlogListView(TemplateView):
+    template_name = 'blog/blog_list.html'
 
 
 class BlogPostListView(ListView):

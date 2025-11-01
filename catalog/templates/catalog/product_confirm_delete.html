@@ -1,14 +1,12 @@
-{% extends 'catalog/base.html' %}
-
-{% block title %}Удаление продукта{% endblock %}
-
+{% extends 'base.html' %}
 {% block content %}
-<h1>Удаление продукта</h1>
-<p>Вы уверены, что хотите удалить продукт "{{ object.name }}"?</p>
-
-<form method="post">
+<div class="container mt-4">
+  <h1>Подтвердите удаление</h1>
+  <p>Вы уверены, что хотите удалить объект "{{ object.name }}"?</p>
+  <form method="post">
     {% csrf_token %}
-    <button type="submit">Удалить</button>
-    <a href="{% url 'catalog:product_list' %}">Отмена</a>
-</form>
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a href="{% url 'catalog:product_detail' object.pk %}" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
 {% endblock %}
