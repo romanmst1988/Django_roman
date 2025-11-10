@@ -1,6 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
 from .models import User
+
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -10,7 +12,16 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password1', 'password2', 'avatar', 'phone', 'country')
+        fields = (
+            "email",
+            "username",
+            "password1",
+            "password2",
+            "avatar",
+            "phone",
+            "country",
+        )
+
 
 class EmailAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField(label='Email')
+    username = forms.EmailField(label="Email")
