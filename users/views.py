@@ -14,7 +14,7 @@ class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
     template_name = "users/register.html"
-    success_url = reverse_lazy("products:list")
+    success_url = reverse_lazy("catalog:product_list")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -45,7 +45,7 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ["username", "email", "avatar", "phone", "country"]
     template_name = "users/profile_edit.html"
-    success_url = reverse_lazy("products:list")
+    success_url = reverse_lazy("catalog:product_list")
 
     def get_object(self, queryset=None):
         return self.request.user

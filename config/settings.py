@@ -60,6 +60,9 @@ EMAIL_HOST_USER = "romain.mst.python@yandex.ru"
 EMAIL_HOST_PASSWORD = "flcnpjdtskywnvkg"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+LOGIN_REDIRECT_URL = "catalog:product_list"
+LOGIN_URL = "users:login"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
