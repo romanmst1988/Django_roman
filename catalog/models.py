@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Product(models.Model):
     name = models.CharField(
         max_length=150,
@@ -43,7 +44,9 @@ class Product(models.Model):
         blank=True,
         null=True,
     )  # Дата последнего изменения
-    is_active = models.BooleanField(default=True, verbose_name="Активен") # Поле для активности
+    is_active = models.BooleanField(
+        default=True, verbose_name="Активен"
+    )  # Поле для активности
 
     def __str__(self):
         return f"Продукт - {self.name}, Категория продукта - {self.category}"
