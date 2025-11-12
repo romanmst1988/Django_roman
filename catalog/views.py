@@ -6,6 +6,11 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from .forms import ProductForm
 from .models import Category, Contact, Product
 
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')
+
 
 class ContactView(TemplateView):
     template_name = "catalog/contact.html"
