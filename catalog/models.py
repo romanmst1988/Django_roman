@@ -1,19 +1,46 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Product(models.Model):
-    name = models.CharField(
-        max_length=150,
-        verbose_name="Наименование объекта недвижимости",
-        help_text="Введите наименование объекта недвижимости",
-    )  # Поле для названия
-    description = models.TextField(
-        max_length=300,
-        verbose_name="Описание объекта недвижимости",
-        help_text="Введите описание объекта недвижимости",
-        null=True,
-        blank=True,
-    )  # Поле для описания
+    STATUS_CHOICES = [
+        ('draft', 'Черновик'),
+        ('published', 'Опубликован'),
+        ('unpublished', 'Снято с публикации'),
+    ]
+
+    name = models.CharField(max_length=255, verbose_name='Название')
+    description = models.TextField(verbose_name='Описание')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
+
+    # Владелец (пользователь, создавший продукт)
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='products',
+        verbose_name='Владелец'
+    )
+
+    # Статус публикации
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='draft',
+        verbose_name='Статус'
+    )
+
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+        permissions = [
+            ("can_unpublish_product", "Может снимать продукт с публикации"),
+        ]
+
+    def __str__(self):
+        return self.name
+
     image = models.ImageField(
         upload_to="photos/",
         blank=True,
