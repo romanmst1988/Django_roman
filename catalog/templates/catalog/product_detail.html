@@ -1,44 +1,18 @@
-{% extends 'base.html' %}
-{% load static %}
+{% if user.is_authenticated %}
+    {% if is_owner %}
+        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-primary btn-sm">✏️ Редактировать</a>
+        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger btn-sm">🗑 Удалить</a>
+    {% elif is_moderator %}
+        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-warning btn-sm">🗑 Удалить (модератор)</a>
+    {% endif %}
 
-{% block title %}{{ product.name }}{% endblock %}
+    {% if can_unpublish and product.is_published %}
+        <a href="{% url 'catalog:unpublish_product' product.pk %}" class="btn btn-secondary btn-sm">🚫 Снять с публикации</a>
+    {% endif %}
 
-{% block content %}
-<div class="container mt-4">
-
-    <div class="card shadow-sm">
-        {% if product.image %}
-            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-        {% endif %}
-        <div class="card-body">
-            <h2 class="card-title">{{ product.name }}</h2>
-            <p class="text-muted">Категория: {{ product.category }}</p>
-            <p class="card-text">{{ product.description }}</p>
-            <p><strong>Цена:</strong> {{ product.price }} ₽</p>
-
-            {% if not product.is_published %}
-                <p class="text-danger"><strong>⚠️ Этот продукт снят с публикации</strong></p>
-            {% endif %}
-
-            <hr>
-
-            {% if user.is_authenticated %}
-                {% if is_owner %}
-                    <a href="{% url 'product_update' product.pk %}" class="btn btn-primary btn-sm">✏️ Редактировать</a>
-                    <a href="{% url 'product_delete' product.pk %}" class="btn btn-danger btn-sm">🗑 Удалить</a>
-                {% elif is_moderator %}
-                    <a href="{% url 'product_delete' product.pk %}" class="btn btn-warning btn-sm">🗑 Удалить (модератор)</a>
-                {% endif %}
-
-                {% if can_unpublish %}
-                    <a href="{% url 'unpublish_product' product.pk %}" class="btn btn-secondary btn-sm">🚫 Снять с публикации</a>
-                {% endif %}
-            {% else %}
-                <p class="text-muted mt-3">Чтобы управлять продуктами, <a href="{% url 'login' %}">войдите в систему</a>.</p>
-            {% endif %}
-        </div>
-    </div>
-
-    <a href="{% url 'product_list' %}" class="btn btn-outline-secondary mt-3">← Назад к списку</a>
-</div>
-{% endblock %}
+    {% if can_publish and not product.is_published %}
+        <a href="{% url 'catalog:publish_product' product.pk %}" class="btn btn-success btn-sm">✅ Опубликовать</a>
+    {% endif %}
+{% else %}
+    <p class="text-muted mt-3">Чтобы управлять продуктами, <a href="{% url 'login' %}">войдите в систему</a>.</p>
+{% endif %}

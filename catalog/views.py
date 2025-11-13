@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from .models import Category, Contact, Product
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html')
@@ -27,64 +28,96 @@ class CategoryListView(ListView):
     context_object_name = "categories"
 
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductListView(ListView):
     model = Product
-    template_name = "catalog/product_list.html"
-    context_object_name = "products"
-    paginate_by = 20
+    template_name = 'catalog/product_list.html'
+    context_object_name = 'products'
+    paginate_by = 12
 
 
-class ProductDetailView(LoginRequiredMixin, DetailView):
+class ProductDetailView(DetailView):
     model = Product
-    template_name = "catalog/product_detail.html"
-    context_object_name = "product"
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        product = self.get_object()
         user = self.request.user
-        context['is_owner'] = user.is_authenticated and user == self.object.owner
-        context['is_moderator'] = (
-                user.is_authenticated and user.groups.filter(name='Модератор продуктов').exists()
-        )
-        context['can_unpublish'] = (
-                user.is_authenticated and user.has_perm('catalog.can_unpublish_product')
-        )
+
+        # Проверяем права пользователя
+        context['is_owner'] = user.is_authenticated and user == product.owner
+        context['is_moderator'] = user.is_authenticated and (user.is_staff or user.is_superuser)
+        context['can_unpublish'] = context['is_owner'] or context['is_moderator']
+        context['can_publish'] = context['is_moderator'] and not product.is_published
+
         return context
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    fields = ['name', 'description', 'price', 'status']
-    success_url = reverse_lazy('product_list')
+    template_name = 'catalog/product_form.html'
+    fields = ['name', 'description', 'price', 'category', 'image']
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
+        messages.success(self.request, 'Продукт успешно создан!')
         return super().form_valid(form)
 
 
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
-    fields = ['name', 'description', 'price', 'status']
-    success_url = reverse_lazy('product_list')
+    template_name = 'catalog/product_form.html'
+    fields = ['name', 'description', 'price', 'category', 'image', 'is_published']
 
     def test_func(self):
         product = self.get_object()
-        return self.request.user == product.owner
+        return self.request.user == product.owner or self.request.user.is_staff
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Продукт успешно обновлен!')
+        return super().form_valid(form)
 
 
 class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
-    success_url = reverse_lazy('product_list')
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:product_list')
 
     def test_func(self):
         product = self.get_object()
-        user = self.request.user
-        return user == product.owner or user.groups.filter(name='Модератор продуктов').exists()
+        return self.request.user == product.owner or self.request.user.is_staff
 
-@permission_required('catalog.can_unpublish_product')
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, 'Продукт успешно удален!')
+        return super().delete(request, *args, **kwargs)
+
+
+@login_required
 def unpublish_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    product.status = 'unpublished'
-    product.save()
-    messages.success(request, f'Продукт "{product.name}" снят с публикации.')
-    return redirect('product_list')
+
+    # Проверяем права
+    if request.user == product.owner or request.user.is_staff:
+        product.is_published = False
+        product.save()
+        messages.success(request, 'Продукт снят с публикации')
+    else:
+        messages.error(request, 'У вас нет прав для этого действия')
+
+    return redirect('catalog:product_detail', pk=product.pk)
+
+
+@login_required
+def publish_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    # Только модераторы/админы могут публиковать
+    if request.user.is_staff:
+        product.is_published = True
+        product.save()
+        messages.success(request, 'Продукт опубликован')
+    else:
+        messages.error(request, 'У вас нет прав для этого действия')
+
+    return redirect('catalog:product_detail', pk=product.pk)
