@@ -9,6 +9,21 @@ from .models import Category, Contact, Product
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from django.core.cache import cache
+from django.http import HttpResponse
+
+def my_view(request):
+    # Попытка получить данные из кеша
+    data = cache.get('my_key')
+
+    # Если данные не найдены в кеше, выполняем вычисления и сохраняем результат в кеш
+    if not data:
+        data = 'some expensive computation'
+        cache.set('my_key', data, 60 * 15)  # Кешируем данные на 15 минут
+
+    # Возвращаем ответ с данными
+    return HttpResponse(data)
+
 def home(request):
     return render(request, 'home.html')
 
