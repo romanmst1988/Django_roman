@@ -9,21 +9,15 @@ from .models import Category, Contact, Product
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from django.core.cache import cache
-from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 
-def my_view(request):
-    # Попытка получить данные из кеша
-    data = cache.get('my_key')
+from django.shortcuts import render
+from .services import get_products_by_category
 
-    # Если данные не найдены в кеше, выполняем вычисления и сохраняем результат в кеш
-    if not data:
-        data = 'some expensive computation'
-        cache.set('my_key', data, 60 * 15)  # Кешируем данные на 15 минут
-
-    # Возвращаем ответ с данными
-    return HttpResponse(data)
-
+def products_by_category_view(request, category_id):
+    products = get_products_by_category(category_id)
+    return render(request, "products_by_category.html", {"products": products})
 def home(request):
     return render(request, 'home.html')
 
@@ -49,7 +43,7 @@ class ProductListView(ListView):
     context_object_name = 'products'
     paginate_by = 12
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')  # 15 минут
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'

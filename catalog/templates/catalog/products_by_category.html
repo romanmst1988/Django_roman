@@ -1,0 +1,11 @@
+<h1>Продукты в категории</h1>
+
+{% for p in products %}
+    <div>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.description }}</p>
+        <p>Цена: {{ p.price }}</p>
+    </div>
+{% empty %}
+    <p>Нет продуктов в этой категории.</p>
+{% endfor %}
