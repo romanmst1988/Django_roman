@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+from django.conf.global_settings import MEDIA_URL, STATICFILES_DIRS, STATIC_ROOT
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -86,12 +88,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "django_db"),
-        "USER": os.getenv("DB_USER", "django_user"),
-        "PASSWORD": os.getenv("DB_PASSWORD", "django_password"),
-        "HOST": os.getenv("DB_HOST", "django_postgres"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv("NAME"),
+        "USER": os.getenv("USER"),
+        "PASSWORD": os.getenv("PASSWORD"),
+        "HOST": os.getenv("HOST"),
+        "PORT": os.getenv("PORT"),
     }
 }
 
