@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Добро пожаловать в магазин недвижимости!</h1>
+    <p class="lead">Используйте навигацию ниже, чтобы перейти к каталогу объектов.</p>
+    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary mt-3">Перейти к каталогу объектов</a>
+</div>
+{% endblock %}

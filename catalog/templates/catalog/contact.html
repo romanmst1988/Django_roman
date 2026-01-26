@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Контактная информация</h1>
+    {% if contacts %}
+        {% for contact in contacts %}
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ contact.name }}</h5>
+                    <p class="card-text"><strong>Адрес:</strong> {{ contact.address }}</p>
+                    <p class="card-text"><strong>Телефон:</strong> {{ contact.phone }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ contact.email }}</p>
+                    <p class="card-text"><strong>Режим работы:</strong> {{ contact.working_hours }}</p>
+                    {% if contact.map_code %}
+                        <div class="map mt-3">
+                            {{ contact.map_code|safe }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Контактная информация пока не добавлена.</p>
+    {% endif %}
+</div>
+{% endblock %}

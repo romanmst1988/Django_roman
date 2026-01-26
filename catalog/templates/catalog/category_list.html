@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Категории недвижимости</h1>
+    <ul class="list-group mt-3">
+        {% for category in categories %}
+            <li class="list-group-item">
+                <strong>{{ category.name }}</strong> — {{ category.description }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">Категорий пока нет.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

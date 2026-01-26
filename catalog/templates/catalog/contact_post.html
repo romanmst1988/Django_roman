@@ -1,4 +1,4 @@
-<!-- students/templates/students/contact.html -->
+<!-- students/templates/students/catalog.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +10,7 @@
 <body>
     <div class="container mt-5">
         <h1>Свяжитесь с нами</h1>
-        <form method="post" action="">
-            {% csrf_token %}
+        <form method="post" action="contact_post/">
             <div class="mb-3">
                 <label for="name" class="form-label">Ваше имя</label>
                 <input type="text" class="form-control" id="name" name="name" required>

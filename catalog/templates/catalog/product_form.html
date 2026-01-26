@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if object %}Редактировать {{ object.name }}{% else %}Создать продукт{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{% if object %}Редактировать {{ object.name }}{% else %}Создать новый продукт{% endif %}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            {% if object %}Обновить{% else %}Создать{% endif %}
+        </button>
+        <a href="{% if object %}{% url 'catalog:product_detail' object.pk %}{% else %}{% url 'catalog:product_list' %}{% endif %}"
+           class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
