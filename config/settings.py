@@ -18,10 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-temp-key-for-prod")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True if os.getenv("DEBUG") == "True" else False
-DEBUG = False
+DEBUG = True if os.getenv("DEBUG") == "True" else False
+# DEBUG = False
 
-# ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 ALLOWED_HOSTS = [
     "178.154.197.215",
     "localhost",
@@ -96,7 +95,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        # "ENGINE": os.getenv("ENGINE"),
         "NAME": os.getenv("NAME"),
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
