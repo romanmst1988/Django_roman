@@ -19,13 +19,15 @@ SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-temp-key-for-prod")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.getenv("DEBUG") == "True" else False
-# DEBUG = False
 
 ALLOWED_HOSTS = [
     "178.154.197.215",
     "localhost",
     "127.0.0.1",
 ]
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 CSRF_TRUSTED_ORIGINS = [
     "http://178.154.197.215",
@@ -99,11 +101,10 @@ DATABASES = {
         "NAME": os.getenv("NAME"),
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": os.getenv("HOST"),
+        "HOST": os.getenv("HOST", "postgres"),
         "PORT": os.getenv("PORT"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
